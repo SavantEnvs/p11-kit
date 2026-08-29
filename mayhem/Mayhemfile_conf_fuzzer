@@ -1,0 +1,10 @@
+project: savantenvs/p11-kit
+target: conf_fuzzer
+# p11_lexer (the config-file / persist-block lexer used by both p11-kit.conf and trust persist parsing).
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/conf_fuzzer/testsuite
+cmds:
+  - cmd: /mayhem/conf_fuzzer
+    libfuzzer: true
+    timeout: 30

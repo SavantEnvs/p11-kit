@@ -1,0 +1,12 @@
+project: savantenvs/p11-kit
+target: uri_fuzzer
+# p11_kit_uri_parse (PKCS#11 URI string parser) + format/accessor round-trip. Format-gated grammar
+# (pkcs11: scheme, percent-encoding, attribute paths) — random bytes rarely pass the scheme check, so
+# starter seeds (real URIs from p11-kit's own OSS-Fuzz corpus) matter for early coverage.
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/uri_fuzzer/testsuite
+cmds:
+  - cmd: /mayhem/uri_fuzzer
+    libfuzzer: true
+    timeout: 30
