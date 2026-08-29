@@ -1,0 +1,12 @@
+project: savantenvs/p11-kit
+target: rpc_fuzzer
+# p11_rpc_server_handle — the PKCS#11 RPC wire-protocol message parser/dispatcher (p11-kit-remote /
+# p11-kit-client IPC surface). Starter seeds are real recorded RPC call messages from p11-kit's own
+# OSS-Fuzz corpus (one call per C_* PKCS#11 function).
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/rpc_fuzzer/testsuite
+cmds:
+  - cmd: /mayhem/rpc_fuzzer
+    libfuzzer: true
+    timeout: 30

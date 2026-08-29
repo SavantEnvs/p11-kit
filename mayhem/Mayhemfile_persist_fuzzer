@@ -1,0 +1,13 @@
+project: savantenvs/p11-kit
+target: persist_fuzzer
+# p11_parser auto-detecting X.509 DER / PEM / p11-kit "persist" trust-anchor formats (trust/parser.c) —
+# p11-kit's trust-store ingestion path (trust/ dir, ASN.1/DER certificate parsing). Seeds are real
+# certificate + persist-format fixtures from p11-kit's own OSS-Fuzz corpus, including several inputs
+# named after previously-fixed memory-safety bugs (regression coverage).
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/persist_fuzzer/testsuite
+cmds:
+  - cmd: /mayhem/persist_fuzzer
+    libfuzzer: true
+    timeout: 30

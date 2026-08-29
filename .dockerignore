@@ -1,0 +1,21 @@
+# .dockerignore for the commit-image build.
+# Goal: bake in the FULL repo (including .git history — the grader uses it),
+# dropping only local build artifacts and editor/OS cruft. Dev image, not minimal.
+
+# ── Build outputs / local cruft (autotools/meson) ────────────────────────────
+build/
+_build/
+*.o
+*.a
+*.so
+*.so.*
+*.dylib
+*.lo
+*.la
+.deps/
+.libs/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~

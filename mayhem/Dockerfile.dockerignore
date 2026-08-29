@@ -1,0 +1,19 @@
+# .dockerignore for the commit-image build (-f mayhem/Dockerfile). BuildKit gives THIS file full
+# precedence over any context-root .dockerignore for that build — p11-kit ships none of its own, but
+# we still pin this explicitly so a future upstream root .dockerignore can never silently strip
+# fixtures or .git out of the build context (docs/netnew-worker-prompt.md §4b).
+#
+# Goal: bake in the FULL repo (including .git history — the grader/PATCH tier need it), dropping only
+# OUR OWN local scratch build dirs. NOTE: p11-kit ships a real, tracked top-level `build/` directory
+# (autotools m4 macros, cross files, cert fixtures) — do NOT exclude `build/` or `out/` generically,
+# that would delete real upstream content. Our own scratch dirs are named distinctly to avoid the
+# collision.
+
+# ── Our own scratch build dirs (mayhem/build.sh output; never committed) ───────────────────────────
+mayhem-build/
+mayhem-tests/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~
